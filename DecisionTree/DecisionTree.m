@@ -7,7 +7,8 @@ function test_pre=DecisionTree(train_data,train_label,test_data,feat_type)
 
 % OUTPUTS:
 % test_pre: m*1 vector, the predictions of the test data
-	tree=BuildTree(train_data,train_label,feat_type(end));
-    test_pre=Predict(tree,test_data);
+    
+	tree=BuildTree(train_data,train_label+1,feat_type(end),length(unique(train_label)));
+    test_pre=Predict(tree,test_data)-1;
 end
 

@@ -1,9 +1,14 @@
-function result=UniqueCount(train_label)
+function result=UniqueCount(train_label,max_unique)
 % Count unique elements' amount
-	unique_elements=unique(train_label);
-    unique_elements(:,2)=zeros(length(unique_elements),1);
-    for ii=1:size(unique_elements,1)
-        unique_elements(ii,2)=length(find(train_label==unique_elements(ii,1)));
+    result=zeros(max_unique,2);
+    for ii=1:size(train_label,1)
+           result(train_label(ii),2)=result(train_label(ii),2)+1;
     end
-	result=unique_elements;
+    for ii=max_unique:-1:1
+        if(result(ii,2)==0)
+            result(ii,:)=[];
+        else
+            result(ii,1)=ii;    
+        end
+    end
 end

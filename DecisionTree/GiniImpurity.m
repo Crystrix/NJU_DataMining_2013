@@ -1,6 +1,6 @@
-function imp=GiniImpurity(train_label)
+function imp=GiniImpurity(train_label,max_unique)
     total=size(train_label,1);
-    counts=UniqueCount(train_label);
+    counts=UniqueCount(train_label,max_unique);
     imp=0;
     for k1=1:size(counts,1)
         p1=counts(k1,2)/total;
