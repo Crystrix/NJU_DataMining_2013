@@ -8,10 +8,11 @@ function node=BuildTree(train_data, train_label, is_classfication)
 	best_gain=0.0;
 	best_criteria={};
     best_sets={};
+    tic
 	for column_index=1:size(train_data,2)
 		column_values=sort(unique(train_data(:,column_index)));
 		for ii=1:size(column_values,1)-1
-            value=(column_values(ii)+column_values(ii+1))/2
+            value=(column_values(ii)+column_values(ii+1))/2;
 			set=DivideTree(train_data,train_label,column_index,value);
 			if(size(set{1,1}.data,1)>0 && size(set{1,2}.data,1)>0)
 				p=size(set{1,1}.data,1)/size(train_data,1);
@@ -21,9 +22,10 @@ function node=BuildTree(train_data, train_label, is_classfication)
 					best_criteria={column_index,value};
 					best_sets=set;
 				end
-			end
-		end
-	end
+            end
+        end
+    end
+    toc
 	if best_gain >0
         leftBranch=BuildTree(best_sets{1,1}.data,best_sets{1,1}.label,is_classfication);
         rightBranch=BuildTree(best_sets{1,2}.data,best_sets{1,2}.label,is_classfication);

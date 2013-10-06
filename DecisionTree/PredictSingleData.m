@@ -1,6 +1,6 @@
 function result=PredictSingleData(tree,data)
-    if(isempty(tree.result))
-        result=tree.result;
+    if(~isempty(tree.results))
+        result=tree.results;
     else
         current_value=data(tree.col);
         if(current_value>tree.value)
@@ -8,6 +8,6 @@ function result=PredictSingleData(tree,data)
         else
             branch=tree.fb;
         end
-        result=classify(observation,branch);
+        result=PredictSingleData(branch,data);
     end
 end
