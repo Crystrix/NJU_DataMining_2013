@@ -6,4 +6,5 @@ function result=RSS(train_label)
     for ii=1:size(train_label,1)
         result=result+(train_label(ii)-m)^2;
     end
+    result=result/length(train_label);
 end
